@@ -2,54 +2,59 @@
 // Use this editor to write, compile and run your Java code online
 
 class SinglyLinkedList {
-
+    
     private ListNode head;
-
+    
     private static class ListNode {
-
+        
         private int data;
         private ListNode next;
-
+        
         public ListNode(int data) {
             this.data = data;
             this.next = null;
         }
     }
-
-    public void display() {
+    
+    public void display(ListNode head) {
         ListNode current = head;
-
+        
         while(current != null) {
             System.out.print(current.data + "->");
             current = current.next;
         }
         System.out.println("null");
     }
-
-    public boolean find(int value) {
-        ListNode temp = head;
-
-        while(temp != null) {      
-            if(temp.data == value) {
-                return true;
-            }
-            temp = temp.next;
+    
+    public ListNode reverse(ListNode head) {
+        
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode next = null;
+        
+        while(current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
         }
-        return false;
+        return previous;
     }
-
+    
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
-
-        sll.head = new ListNode(10);
+        
+        ListNode head = new ListNode(10);
         ListNode second = new ListNode(1);
         ListNode third = new ListNode(8);
         ListNode fourth = new ListNode(11);
-
-        sll.head.next = second;
+        
+        head.next = second;
         second.next = third;
         third.next = fourth;
-
-        System.out.println(sll.find(11));
+        
+        sll.display(head);
+        ListNode result = sll.reverse(head);
+        sll.display(result);
     }
 }
