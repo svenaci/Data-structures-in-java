@@ -28,7 +28,7 @@ class SinglyLinkedList {
     
     public void deleteNodeAtBeginning() {
         if(head == null) {
-            return;
+            return null;
         }
         ListNode temp = head;
         head = head.next;
