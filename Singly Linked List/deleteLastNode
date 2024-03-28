@@ -26,13 +26,25 @@ class SinglyLinkedList {
         System.out.println("null");
     }
     
-    public void deleteNodeAtBeginning() {
+    public void deleteLastNode() {
+        
         if(head == null) {
             return;
+        } 
+        
+        if(head.next == null) {
+            head = null;
+            return;
         }
-        ListNode temp = head;
-        head = head.next;
-        temp.next = null;
+        
+        ListNode current = head;
+        ListNode previous = null;
+        
+        while(current.next != null) {
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null;
     }
     
     public static void main(String[] args) {
@@ -46,8 +58,15 @@ class SinglyLinkedList {
         sll.head.next = second;
         second.next = third;
         third.next = fourth;
-        
-        sll.deleteNodeAtBeginning();
+
+        sll.display();
+        sll.deleteLastNode();
+        sll.display();
+        sll.deleteLastNode();
+        sll.display();
+        sll.deleteLastNode();
+        sll.display();
+        sll.deleteLastNode();
         sll.display();
     }
 }
