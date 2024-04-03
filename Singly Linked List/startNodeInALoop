@@ -1,0 +1,78 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class SinglyLinkedList {
+    
+    private ListNode head;
+    
+    private static class ListNode {
+        
+        private int data;
+        private ListNode next;
+        
+        public ListNode(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+    
+    public void display() {
+        ListNode current = head;
+        
+        while(current != null) {
+            System.out.print(current.data + "->");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    //Floyds cycle detection algorithm
+   public ListNode startingNodeOfLoop() {
+       
+       ListNode fastPointer = head;
+       ListNode slowPointer = head;
+       
+       while(fastPointer != null && fastPointer.next != null) {
+           fastPointer = fastPointer.next.next;
+           slowPointer = slowPointer.next;
+           
+           if(fastPointer == slowPointer) {
+               return getStartingNode(slowPointer);
+           }
+       }
+       return null;
+    }
+    
+    public ListNode getStartingNode(ListNode slowPointer) {
+        ListNode current = head;
+        
+        while(current != slowPointer) {
+            current = current.next;
+            slowPointer = slowPointer.next;
+        }
+        return current;
+    }
+
+    public static void main(String[] args) {
+        SinglyLinkedList sll = new SinglyLinkedList();
+        
+        sll.head = new ListNode(5);
+        ListNode second = new ListNode(8);
+        ListNode third = new ListNode(7);
+        ListNode fourth = new ListNode(1);
+        ListNode fifth = new ListNode(11);
+        ListNode sixth = new ListNode(10);
+        
+        sll.head.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = sixth;
+        sixth.next = third;
+
+        ListNode result = sll.startingNodeOfLoop();
+        
+        System.out.println(result.data);
+
+    }
+}
