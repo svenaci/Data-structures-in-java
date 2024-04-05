@@ -1,0 +1,87 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class SinglyLinkedList {
+    
+    private ListNode head;
+    
+    private static class ListNode {
+        
+        private int data;
+        private ListNode next;
+        
+        public ListNode(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+    
+    public void display() {
+        ListNode current = head;
+        
+        while(current != null) {
+            System.out.print(current.data + "->");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    //Floyds cycle detection algorithm
+   public static ListNode addTwoNumbers(ListNode a, ListNode b) {
+       
+      ListNode dummyNode = new ListNode(4); //node value doesnt matter
+      ListNode dummyPointer = dummyNode;
+       
+       int carry = 0;
+       int count = 1;
+       while(a != null || b != null) {
+           int valueA = (a!=null) ? a.data : 0;
+           int valueB = (b!=null) ? b.data : 0;
+           
+           int sum = valueA + valueB + carry;
+           
+           carry = (int)(sum/10);
+           
+           dummyPointer.next = new ListNode(sum%10);
+           dummyPointer = dummyPointer.next;
+           
+           if(a!=null) {
+               a = a.next;
+           }
+           
+           if(b!=null) {
+               b = b.next;
+           }
+           count = count +1;
+       }
+       
+       if(carry>0) {
+           dummyPointer.next = new ListNode(carry);
+       }
+       return dummyNode.next;
+    }
+
+    public static void main(String[] args) {
+        SinglyLinkedList sllA = new SinglyLinkedList();
+        SinglyLinkedList sllB = new SinglyLinkedList();
+        
+        sllA.head = new ListNode(7);
+        ListNode secondA = new ListNode(4);
+        ListNode thirdA = new ListNode(9);
+        
+        sllA.head.next = secondA;
+        secondA.next = thirdA;
+
+        sllB.head = new ListNode(5);
+        ListNode secondB = new ListNode(6);
+
+        sllB.head.next = secondB;
+
+        sllA.display();
+        sllB.display();
+        
+        SinglyLinkedList result = new SinglyLinkedList();
+        result.head = addTwoNumbers(sllA.head, sllB.head);
+        result.display();
+    }
+}
