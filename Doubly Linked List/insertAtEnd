@@ -56,25 +56,25 @@ class DoublyLinkedList {
         System.out.println("null");
     }
     
-    public void insertAtStart(int value) {
+    public void insertAtEnd(int value) {
         ListNode newNode = new ListNode(value);
         
         if(isEmpty()) {
-            tail = newNode;
+            head = newNode;
         } else {
-            head.previous = newNode;
-            newNode.next = head;
+            tail.next = newNode;
+            newNode.previous = tail;
         }
         
-        head = newNode;
+        tail = newNode;
     }
     
     public static void main(String[] args) {
         DoublyLinkedList dll = new DoublyLinkedList();
-        dll.insertAtStart(10);
-        dll.insertAtStart(8);
-        dll.insertAtStart(5);
-        dll.insertAtStart(1);
+        dll.insertAtEnd(10);
+        dll.insertAtEnd(8);
+        dll.insertAtEnd(5);
+        dll.insertAtEnd(1);
         
         dll.displayForward();
         dll.displayBackward();
