@@ -67,6 +67,7 @@ class DoublyLinkedList {
         }
         
         tail = newNode;
+        length++;
     }
     
     public static void main(String[] args) {
