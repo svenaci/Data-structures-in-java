@@ -1,0 +1,72 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+public class Stack {
+    
+    private int top;
+    private int[] stackArr;
+    
+    public Stack(int size) {
+        top = -1;
+        stackArr = new int[size];
+    }
+    
+    //default constructor
+    public Stack() {
+        this(10);
+    }
+    
+    public int size() {
+        return top+1;
+    }
+    
+    public boolean isFull() {
+        return stackArr.length == size();
+    }
+    
+    public boolean isEmpty() {
+        return size() == -1;
+    }
+
+    public void push(int data) {
+        if(isFull()) {
+            System.out.println("Stack is full!");
+        } else {
+            top++;
+            stackArr[top] = data;   
+        }
+    }
+    
+    public int pop() {
+        if(isEmpty()) {
+           System.out.println("Stack is empty!"); 
+           return -1;
+        } else {
+            int result = stackArr[top];
+            top--;
+            return result;
+        }
+    }
+    
+    public int peek() {
+        if(isEmpty()) {
+           System.out.println("Stack is empty!"); 
+           return -1;
+        } else {
+            return stackArr[top];
+        }
+    }
+    
+    public static void main(String[] args) {
+        Stack stk = new Stack(3);
+        
+        stk.push(0);
+        stk.push(5);
+        stk.push(10);
+        System.out.println(stk.pop());
+        System.out.println(stk.pop());
+        System.out.println(stk.peek());
+        System.out.println(stk.pop());
+        System.out.println(stk.pop());
+    }
+}
